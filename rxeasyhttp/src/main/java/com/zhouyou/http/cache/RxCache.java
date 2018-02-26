@@ -41,7 +41,6 @@ import io.reactivex.ObservableSource;
 import io.reactivex.ObservableTransformer;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.exceptions.Exceptions;
-import io.reactivex.plugins.RxJavaPlugins;
 
 
 /**
@@ -141,7 +140,7 @@ public final class RxCache {
                     subscriber.onError(e);
                 }
                 Exceptions.throwIfFatal(e);
-                RxJavaPlugins.onError(e);
+                //RxJavaPlugins.onError(e);
                 return;
             }
 

@@ -21,6 +21,7 @@ import android.app.ProgressDialog;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
@@ -56,12 +57,14 @@ public class UploadActivity extends AppCompatActivity {
     private IProgressDialog mProgressDialog = new IProgressDialog() {
         @Override
         public Dialog getDialog() {
-            dialog = new ProgressDialog(UploadActivity.this);
-            dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);// 设置进度条的形式为圆形转动的进度条
-            dialog.setMessage("正在上传...");
-            // 设置提示的title的图标，默认是没有的，如果没有设置title的话只设置Icon是不会显示图标的
-            dialog.setTitle("文件上传");
-            dialog.setMax(100);
+            if(dialog==null) {
+                dialog = new ProgressDialog(UploadActivity.this);
+                dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);// 设置进度条的形式为圆形转动的进度条
+                dialog.setMessage("正在上传...");
+                // 设置提示的title的图标，默认是没有的，如果没有设置title的话只设置Icon是不会显示图标的
+                dialog.setTitle("文件上传");
+                dialog.setMax(100);
+            }
             return dialog;
         }
     };
@@ -79,7 +82,7 @@ public class UploadActivity extends AppCompatActivity {
                 }
             }
         };
-        File file = new File("/sdcard/1.jpg");
+        File file = new File(Environment.getExternalStorageDirectory().getPath()+"/1.jpg");
         EasyHttp.post("/v1/user/uploadAvatar")
                 //如果有文件名字可以不用再传Type,会自动解析到是image/*
                 .params("avatar", file, file.getName(), listener)
@@ -176,7 +179,7 @@ public class UploadActivity extends AppCompatActivity {
     }
 
     public void onUploadFileMaps(View view) {
-        File file = new File("/sdcard/1.jpg");
+        File file = new File(Environment.getExternalStorageDirectory().getPath()+"/1.jpg");
         UIProgressResponseCallBack mUIProgressResponseCallBack = new UIProgressResponseCallBack() {
             @Override
             public void onUIResponseProgress(long bytesRead, long contentLength, boolean done) {
@@ -209,7 +212,7 @@ public class UploadActivity extends AppCompatActivity {
     }
 
     public void onUploadFileMaps2(View view) {
-        File file = new File("/sdcard/1.jpg");
+        File file = new File(Environment.getExternalStorageDirectory().getPath()+"/1.jpg");
         UIProgressResponseCallBack mUIProgressResponseCallBack = new UIProgressResponseCallBack() {
             @Override
             public void onUIResponseProgress(long bytesRead, long contentLength, boolean done) {
@@ -245,7 +248,7 @@ public class UploadActivity extends AppCompatActivity {
     }
 
     public void onUploadOne(View view) {
-        File file = new File("/sdcard/1.jpg");
+        File file = new File(Environment.getExternalStorageDirectory().getPath()+"/1.jpg");
         UIProgressResponseCallBack mUIProgressResponseCallBack = new UIProgressResponseCallBack() {
             @Override
             public void onUIResponseProgress(long bytesRead, long contentLength, boolean done) {

@@ -55,7 +55,7 @@ public abstract class BaseSubscriber<T> extends DisposableObserver<T> {
 
     public BaseSubscriber(Context context) {
         if (context != null) {
-            contextWeakReference = new WeakReference<Context>(context);
+            contextWeakReference = new WeakReference<>(context);
         }
     }
 
